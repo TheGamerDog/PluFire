@@ -1,0 +1,26 @@
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "$kotlinVersion"
+    id "com.github.johnrengelman.shadow" version "$shadowVersion"
+}
+
+group = "ru.thegamerdog"
+version = "0.0.1"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // PluTail
+    compileOnly files("./libs/PluTail.jar")
+
+    // Test
+    testImplementation "org.jetbrains.kotlin:kotlin-test"
+}
+
+test {
+    useJUnitPlatform()
+}
+kotlin {
+    jvmToolchain(17)
+}

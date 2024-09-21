@@ -1,0 +1,9 @@
+{
+  "name": "PluFire",
+  "description": "Implementation of the Tweegee avatar chat server part for PluTail",
+  "version": "0.0.1",
+  "authors": [
+    "TheGamerDog"
+  ],
+  "mainClass": "ru.thegamerdog.plufire.PluFire"
+}
