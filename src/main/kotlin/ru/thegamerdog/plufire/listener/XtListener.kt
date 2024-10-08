@@ -23,7 +23,7 @@ class XtListener(private val plugin: PluFire) : IEventConsumer<XtMessageEvent> {
     override fun onEvent(event: XtMessageEvent) {
         if (event.zoneName != plugin.zoneName) return
 
-        plugin.logger.trace("Received sys raw message: ${event.message}")
+        plugin.logger.trace("Received xt raw message: ${event.message}")
 
         when (val commandType = CommandType.get(event.message[0])) {
             CommandType.XML -> {
@@ -33,6 +33,8 @@ class XtListener(private val plugin: PluFire) : IEventConsumer<XtMessageEvent> {
                 val inMessage = event.message
                     .replace("<" + xmlArr[1] + "<" + xmlArr[2], "")
                     .replace("</body></msg>", "")
+                    .replace(Regex("^<!\\[CDATA\\["), "")
+                    .replace(Regex("]]>$"), "")
 
                 val xmlMessage = XML.decodeFromString(MsgXml.serializer(), outMessage)
                 val commandName = XtCommandName.get(xmlMessage.body.action, commandType) ?: return
