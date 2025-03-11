@@ -33,7 +33,7 @@ data class RoomObjectJson(
 )
 
 class RoomHandler(private val plugin: PluFire) : IXtCommandHandler {
-    @XtCommandHandler(XtCommandName.JOIN_ROOM)
+    @XtCommandHandler(XtCommandName.JoinRoom)
     fun joinRoom(user: IUser, roomId: Int, extensionName: String, data: JoinRoomJson) {
         if (extensionName != "WorldsExtension") return
 
@@ -49,7 +49,7 @@ class RoomHandler(private val plugin: PluFire) : IXtCommandHandler {
     }
 
     // TODO: Add behavior for all objects
-    @XtCommandHandler(XtCommandName.ROOM_OBJECT_EVENT)
+    @XtCommandHandler(XtCommandName.RoomObjectEvent)
     fun roomObjEvent(user: IUser, roomId: Int, extensionName: String, data: RoomObjectJson) {
         if (extensionName != "RoomExtension") return // TODO: Add extension handler (?)
         if (data.name == "eventPlayer") return getResultForEventPlayer(user, data)

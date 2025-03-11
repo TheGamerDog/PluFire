@@ -2,6 +2,8 @@ package ru.thegamerdog.plufire
 
 import org.reflections.Reflections
 import org.reflections.scanners.Scanners
+import org.reflections.util.ClasspathHelper
+import org.reflections.util.ConfigurationBuilder
 import ru.thegamerdog.plufire.command.IXtCommandHandler
 import ru.thegamerdog.plufire.command.XtCommandRegistry
 import ru.thegamerdog.plufire.listener.*
@@ -20,9 +22,14 @@ class PluFire(
     override fun onEnable() {
         logger.info("${data.name} plugin started")
 
-        val reflections = Reflections("ru.thegamerdog.plufire.command.handler")
+        val config = ConfigurationBuilder()
+            .addClassLoaders(classLoader)
+            .setUrls(ClasspathHelper.forPackage("ru.thegamerdog.plufire.command.handler", classLoader))
+            .setScanners(Scanners.SubTypes)
 
-        reflections.get(Scanners.SubTypes.of(IXtCommandHandler::class.java).asClass<IXtCommandHandler>())
+        val reflections = Reflections(config)
+
+        reflections.getSubTypesOf(IXtCommandHandler::class.java)
             .forEach { type ->
                 val handlerType = type.kotlin as KClass<IXtCommandHandler>
 

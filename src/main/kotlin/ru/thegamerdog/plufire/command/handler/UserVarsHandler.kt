@@ -24,7 +24,7 @@ data class NewPositionJson(
 class UserVarsHandler(plugin: PluFire) : IXtCommandHandler {
     private val zone = plugin.zoneManager.getZoneByName(plugin.zoneName)!!
 
-    @XtCommandHandler(XtCommandName.SET_NEW_POS)
+    @XtCommandHandler(XtCommandName.SetNewPos)
     fun setNewPos(user: IUser, roomId: Int, extensionName: String, data: NewPositionJson) {
         if (extensionName != "RoomExtension") return
 

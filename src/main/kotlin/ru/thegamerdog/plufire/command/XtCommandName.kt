@@ -6,9 +6,9 @@ enum class XtCommandName(
     val key: String,
     val type: CommandType
 ) {
-    JOIN_ROOM("joinRoom", CommandType.JSON),
-    SET_NEW_POS("newPosition", CommandType.JSON),
-    ROOM_OBJECT_EVENT("roomObjectEvent", CommandType.JSON);
+    JoinRoom("joinRoom", CommandType.JSON),
+    SetNewPos("newPosition", CommandType.JSON),
+    RoomObjectEvent("roomObjectEvent", CommandType.JSON);
 
     companion object {
         fun get(key: String, commandType: CommandType) = entries
